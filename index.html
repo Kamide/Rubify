@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Rubify</title>
+        <link rel="stylesheet" href="base.css">
+        <script type="text/javascript" src="rubify.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+    </head>
+    <body onload="initialize();">
+        <div id="page">
+            <div id="toolbox">
+                <h1 id="toolbox-title">Rubify</h1>
+                <div id="toolbox-options">
+                    <fieldset>
+                        <legend>Source Text</legend>
+                        <textarea id="sourceText" rows="2"></textarea>
+                        <div>
+                            <input type="radio" id="stByChar" name="sourceTextSplitType" checked>
+                            <label for="stByChar">Split by Character</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="stBySpace" name="sourceTextSplitType">
+                            <label for="stBySpace">Split by Space</label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Annotations</legend>
+                        <textarea id="annotations" rows="2"></textarea>
+                        <div>
+                            <input type="radio" id="aByChar" name="annotationsSplitType">
+                            <label for="aByChar">Split by Character</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="aBySpace" name="annotationsSplitType" checked>
+                            <label for="aBySpace">Split by Space</label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Output</legend>
+                        <div>
+                            <input type="checkbox" id="spaced">
+                            <label for="spaced">Space After Ruby Block</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="superscripted">
+                            <label for="superscripted">Superscript Tone Numbers</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="colorCoded">
+                            <label for="colorCoded">Color by Tone Numbers</label>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div id="commands">
+                <button type="button" onclick="addRubyToEditor();">Add</button>
+                <button type="button" onclick="clearEditor();">Clear</button>
+            </div>
+            <div id="editor"></div>
+            <h2 id="viewer-title">HTML</h2>
+            <textarea id="viewer"></textarea>
+        </div>
+    </body>
+</html>
