@@ -1,26 +1,38 @@
 var rubies = [];
 
-var defaultColors = ["black", "lightskyblue", "orange", "royalblue", "darkseagreen", "crimson", "midnightblue"];
-
 function initialize() {
-    sourceText = document.getElementById("sourceText");
-    annotations = document.getElementById("annotations");
-    editor = document.getElementById("editor");
-    viewer = document.getElementById("viewer");
-    stByChar = document.getElementById("stByChar");
-    aBySpace = document.getElementById("aBySpace");
-    spaced = document.getElementById("spaced");
-    superscripted = document.getElementById("superscripted");
-    colorCoded = document.getElementById("colorCoded");
+    baseText = document.getElementById('baseText');
+    annotation = document.getElementById('annotation');
+    baseTextDelimiter = document.getElementById('baseTextDelimiter');
+    annotationDelimiter = document.getElementById('annotationDelimiter');
+
+    segmented = document.getElementById('segmented');
+    spaced = document.getElementById('spaced');
+    superscripted = document.getElementById('superscripted');
+    colored = document.getElementById('colored');
+
+    editor = document.getElementById('editor');
+    viewer = document.getElementById('viewer');
 }
 
 function addRubyToEditor() {
-    var stLines = sourceText.value.split("\n");
-    var aLines = annotations.value.split("\n");
+    if (baseText === '')
+        return;
 
-    for (var i = 0; i < stLines.length; ++i) {
-        var newRubies = rubify(stLines[i], aLines[i], stByChar.checked, aBySpace.checked, spaced.checked, superscripted.checked, colorCoded.checked ? defaultColors : null);
-        rubies = [...rubies, ...newRubies];
+    var texts = baseText.value.split('\n');
+    var notes = annotation.value.split('\n');
+
+    for (var i = 0; i < texts.length; ++i) {
+        var delimiters = {
+            'text': baseTextDelimiter.options[baseTextDelimiter.selectedIndex].value,
+            'note': annotationDelimiter.options[annotationDelimiter.selectedIndex].value
+        };
+        var text = texts[i];
+        if (text === '')
+            continue;
+        var note = notes[i] ? notes[i] : '';
+        rubies.push(new Annotation(text, note, delimiters,
+            segmented.checked, spaced.checked, superscripted.checked, colored.checked));
     }
 
     display();
@@ -29,7 +41,7 @@ function addRubyToEditor() {
 function clearEditor() {
     rubies = []
     removeChildren(editor);
-    viewer.value = "";
+    viewer.value = '';
 }
 
 function removeChildren(parent) {
@@ -38,6 +50,5 @@ function removeChildren(parent) {
 }
 
 function display() {
-    editor.innerHTML = rubies.join("");
-    viewer.value = rubies.join("");
+    editor.innerHTML = viewer.value = rubies.join('');
 }

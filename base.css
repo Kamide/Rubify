@@ -12,6 +12,14 @@ body {
     font-size: 16pt;
 }
 
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.2em;
+}
+
 #page {
     display: grid;
     grid-template-rows: 4;
@@ -20,8 +28,8 @@ body {
     box-sizing: border-box;
 }
 
-#toolbox-options fieldset:not(last-child) {
-    padding-bottom: 0.5em;
+#toolbox-options fieldset:not(:last-child) {
+    margin-bottom: 0.5em;
 }
 
 #toolbox-options fieldset {
@@ -29,7 +37,6 @@ body {
 }
 
 #toolbox-options textarea {
-    margin-bottom: 0.5em;
     width: 100%;
     min-height: 2em;
     font: inherit;
@@ -38,7 +45,8 @@ body {
 
 #editor, #viewer {
     padding: 12px;
-    min-height: 10em;
+    min-height: 8em;
+    box-sizing: border-box;
     word-break: break-all;
 }
 
@@ -58,7 +66,7 @@ ruby:hover {
 }
 
 rt {
-    font-size: 1em;
+    font-size: 0.75em;
 }
 
 @media only screen and (min-width: 800px) and (min-height: 600px) {
@@ -78,13 +86,28 @@ rt {
 
     #toolbox-options {
         display: flex;
-        justify-content: space-between;
     }
 
-    #toolbox-options fieldset:not(last-child) {
-        padding-bottom: 0em;
-        padding-right: 1em;
+    #toolbox-options fieldset:not(:last-child) {
+        margin-bottom: 0em;
+        margin-right: 1em;
         flex: 1;
+    }
+
+    #toolbox-options fieldset {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #commands, #editor-title {
+        grid-row-start: toolbox-end;
+        grid-column-start: content-start;
+    }
+
+    #commands {
+        align-self: center;
+        justify-self: flex-end;
+        z-index: 1;
     }
 
     #editor {

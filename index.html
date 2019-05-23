@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>Rubify</title>
         <link rel="stylesheet" href="base.css">
-        <script type="text/javascript" src="rubify.js"></script>
+        <script type="text/javascript" src="annotation.js"></script>
         <script type="text/javascript" src="main.js"></script>
     </head>
     <body onload="initialize();">
@@ -13,42 +13,40 @@
                 <h1 id="toolbox-title">Rubify</h1>
                 <div id="toolbox-options">
                     <fieldset>
-                        <legend>Source Text</legend>
-                        <textarea id="sourceText" rows="2"></textarea>
-                        <div>
-                            <input type="radio" id="stByChar" name="sourceTextSplitType" checked>
-                            <label for="stByChar">Split by Character</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="stBySpace" name="sourceTextSplitType">
-                            <label for="stBySpace">Split by Space</label>
-                        </div>
+                        <legend>Base Text</legend>
+                        <textarea id="baseText" rows="2"></textarea>
+                        <select id="baseTextDelimiter">
+                            <option value=null>Process Entire String In One Go</option>
+                            <option value="" selected>Process Characters Individually</option>
+                            <option value=" ">Process Each Word Separately (Split by Space)</option>
+                        </select>
                     </fieldset>
                     <fieldset>
-                        <legend>Annotations</legend>
-                        <textarea id="annotations" rows="2"></textarea>
-                        <div>
-                            <input type="radio" id="aByChar" name="annotationsSplitType">
-                            <label for="aByChar">Split by Character</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="aBySpace" name="annotationsSplitType" checked>
-                            <label for="aBySpace">Split by Space</label>
-                        </div>
+                            <legend>Annotation</legend>
+                        <textarea id="annotation" rows="2"></textarea>
+                        <select id="annotationDelimiter">
+                            <option value=null>Process Entire String In One Go</option>
+                            <option value="">Process Characters Individually</option>
+                            <option value=" " selected>Process Each Word Separately (Split by Space)</option>
+                        </select>
                     </fieldset>
                     <fieldset>
-                        <legend>Output</legend>
+                        <legend>Settings</legend>
+                        <div>
+                            <input type="checkbox" id="segmented" checked>
+                            <label for="segmented">Segment Each Block</label>
+                        </div>
                         <div>
                             <input type="checkbox" id="spaced">
-                            <label for="spaced">Space After Ruby Block</label>
+                            <label for="spaced">Space After Each Block</label>
                         </div>
                         <div>
                             <input type="checkbox" id="superscripted">
-                            <label for="superscripted">Superscript Tone Numbers</label>
+                            <label for="superscripted">Superscript Tone #</label>
                         </div>
                         <div>
-                            <input type="checkbox" id="colorCoded">
-                            <label for="colorCoded">Color by Tone Numbers</label>
+                            <input type="checkbox" id="colored">
+                            <label for="colored">Color by Tone #</label>
                         </div>
                     </fieldset>
                 </div>
@@ -57,6 +55,7 @@
                 <button type="button" onclick="addRubyToEditor();">Add</button>
                 <button type="button" onclick="clearEditor();">Clear</button>
             </div>
+            <h2 id="editor-title">Output</h2>
             <div id="editor"></div>
             <h2 id="viewer-title">HTML</h2>
             <textarea id="viewer"></textarea>
