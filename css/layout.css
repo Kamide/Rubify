@@ -1,0 +1,150 @@
+html, body, h1, h2 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, "Microsoft YaHei", "PingFang SC", "PingFang TC", "PingFang HK", sans-serif;
+    font-size: 16pt;
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.25em;
+}
+
+#page {
+    display: grid;
+    grid-template-rows: 4;
+    grid-gap: 0.5em;
+    padding: 0.5em;
+    box-sizing: border-box;
+}
+
+#title span {
+    display: inline-block;
+    margin-left: 0.5em;
+    font-size: 0.5em;
+    font-style: italic;
+    letter-spacing: 0.5em;
+    vertical-align: middle;
+}
+
+#inputbar fieldset {
+    border: none;
+}
+
+#inputbar fieldset:not(:last-child) {
+    margin-bottom: 0.5em;
+}
+
+#inputbar legend {
+    font-style: italic;
+    margin-bottom: 0.25em;
+}
+
+#inputbar textarea {
+    width: 100%;
+    min-height: 2em;
+    font: inherit;
+    resize: vertical;
+}
+
+.toolbar h2:not(:last-child) {
+    margin-bottom: 0.5em;
+}
+
+#editor, #viewer {
+    padding: 0.75em;
+    min-height: 8em;
+    word-break: break-all;
+}
+
+#editor {
+    border: thin solid silver;
+    overflow: scroll;
+}
+
+#viewer {
+    font-size: 0.75em;
+    resize: none;
+}
+
+ruby:hover {
+    outline: thick solid rgba(250, 30, 20, 0.5);
+    outline-offset: 4px;
+}
+
+rt {
+    font-size: 0.75em;
+}
+
+@media only screen and (min-width: 800px) and (min-height: 600px) {
+    #page {
+        grid-template-rows: [titlebar] auto [inputbar] auto [toolbar] auto [content] 1fr;
+        grid-template-columns: [page-start] 3fr [sidebar] 2fr [page-end];
+        height: 100vh;
+    }
+
+    #titlebar {
+        grid-row-start: titlebar;
+        grid-column-start: page-start;
+        grid-column-end: page-end;
+    }
+
+    #inputbar {
+        grid-row-start: inputbar;
+        grid-column-start: page-start;
+        grid-column-end: page-end;
+    }
+
+    #inputbar {
+        display: flex;
+    }
+
+    #inputbar fieldset:nth-child(-n+2) {
+        flex: 1;
+    }
+
+    #inputbar fieldset:not(:last-child) {
+        margin-bottom: 0;
+        margin-right: 0.5em;
+    }
+
+    .toolbar {
+        grid-row-start: toolbar;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    .toolbar h2:not(:last-child) {
+        margin-bottom: 0;
+    }
+
+    .content {
+        grid-row-start: content;
+    }
+
+    .mainbar {
+        grid-column-start: page-start;
+    }
+
+    .sidebar {
+        grid-column-start: sidebar;
+    }
+}
+
+@media only screen and (min-width: 1280px) and (min-height: 720px) {
+    #page {
+        padding: 1em;
+        grid-column-gap: 1em;
+    }
+
+    #inputbar fieldset:not(:last-child) {
+        margin-right: 1em;
+    }
+}

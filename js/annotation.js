@@ -2,7 +2,7 @@ const RUBY_L = '<ruby>', RUBY_R = '</ruby>',
       RB_L = '<rb>', RB_R = '</rb>',
       RT_L = '<rt>', RT_R = '</rt>',
       SUP_L = '<sup>', SUP_R = '</sup>',
-      SPACE = ' ', NBSP = '&nbsp;';
+      SPACE = ' ';
 
 const COLORS = ['black', 'lightskyblue', 'orange', 'royalblue', 'darkseagreen', 'crimson', 'midnightblue',
                 'lightskyblue', 'royalblue', 'midnightblue'];
@@ -61,8 +61,12 @@ class Annotation {
     }
 
     toString() {
-        if (this.note === '')
-            return this.text + (this.spaced ? SPACE : '');
+        if (this.note === '') {
+            if (this.spaced)
+                return this.text + SPACE;
+            else
+                return this.text;
+        }
 
         var rubies = '';
         var texts = this.texts;
@@ -78,12 +82,13 @@ class Annotation {
         }
         else {
             for (var i = 0; i < count; ++i) {
-                if (this.spaced)
-                    rubies += this.rubify(texts[i] + NBSP, notes[i] + NBSP)
-                else
-                    rubies += this.rubify(texts[i], notes[i])
+                rubies += this.rubify(texts[i], notes[i])
+                if (this.spaced && i < count - 1)
+                    rubies += SPACE;
             }
             rubies = RUBY_L + rubies + RUBY_R;
+            if (this.spaced)
+                rubies += SPACE;
         }
 
         return rubies;

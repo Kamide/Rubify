@@ -3,62 +3,72 @@
     <head>
         <meta charset="utf-8">
         <title>Rubify</title>
-        <link rel="stylesheet" href="base.css">
-        <script type="text/javascript" src="annotation.js"></script>
-        <script type="text/javascript" src="main.js"></script>
+        <link rel="stylesheet" href="css/layout.css">
+        <link rel="stylesheet" href="css/input.css">
+        <script type="text/javascript" src="js/annotation.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
     </head>
     <body onload="initialize();">
         <div id="page">
-            <div id="toolbox">
-                <h1 id="toolbox-title">Rubify</h1>
-                <div id="toolbox-options">
-                    <fieldset>
-                        <legend>Base Text</legend>
-                        <textarea id="baseText" rows="2"></textarea>
-                        <select id="baseTextDelimiter">
-                            <option value=null>Process Entire String In One Go</option>
-                            <option value="" selected>Process Characters Individually</option>
-                            <option value=" ">Process Each Word Separately (Split by Space)</option>
-                        </select>
-                    </fieldset>
-                    <fieldset>
-                            <legend>Annotation</legend>
-                        <textarea id="annotation" rows="2"></textarea>
-                        <select id="annotationDelimiter">
-                            <option value=null>Process Entire String In One Go</option>
-                            <option value="">Process Characters Individually</option>
-                            <option value=" " selected>Process Each Word Separately (Split by Space)</option>
-                        </select>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Settings</legend>
-                        <div>
-                            <input type="checkbox" id="segmented" checked>
-                            <label for="segmented">Segment Each Block</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="spaced">
-                            <label for="spaced">Space After Each Block</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="superscripted">
-                            <label for="superscripted">Superscript Tone #</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="colored">
-                            <label for="colored">Color by Tone #</label>
-                        </div>
-                    </fieldset>
+            <div id="titlebar">
+                <h1 id="title">Rubify<span>口山月戈火卜</span></h1>
+            </div>
+            <div id="inputbar">
+                <fieldset>
+                    <legend>Base Text</legend>
+                    <textarea id="baseText" rows="2"></textarea>
+                    <select id="baseTextDelimiter">
+                        <option value=null>Process Everything In One Go</option>
+                        <option value="" selected>Process Characters Individually</option>
+                        <option value=" ">Process Words Separately (Split by Space)</option>
+                        <option value="pinyin" disabled>Process Compound Hanzi (e.g. maps 快樂 with kuàilè)</option>
+                    </select>
+                </fieldset>
+                <fieldset>
+                        <legend>Annotation</legend>
+                    <textarea id="annotation" rows="2"></textarea>
+                    <select id="annotationDelimiter">
+                        <option value=null>Process Everything In One Go</option>
+                        <option value="">Process Characters Individually</option>
+                        <option value=" " selected>Process Words Separately (Split by Space)</option>
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <legend>Format</legend>
+                    <div>
+                        <input type="checkbox" id="segmented" checked>
+                        <label for="segmented">Segmented Blocks</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="spaced">
+                        <label for="spaced">Interspaced Blocks</label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Tone</legend>
+                    <div>
+                        <input type="checkbox" id="superscripted">
+                        <label for="superscripted">Superscripted Tone #</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="colored">
+                        <label for="colored">Color-coded Tone #</label>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="toolbar mainbar float-right">
+                <h2>Output</h2>
+                <div class="float-right">
+                    <button type="button" onclick="addRubyToEditor();">Add New Ruby</button>
+                    <button type="button" onclick="clearEditor();">Clear All Rubies</button>
                 </div>
             </div>
-            <div id="commands">
-                <button type="button" onclick="addRubyToEditor();">Add</button>
-                <button type="button" onclick="clearEditor();">Clear</button>
+            <div id="editor" class="content grid-col-main"></div>
+            <div class="toolbar sidebar float-right">
+                <h2 class="toolbar sidebar">HTML</h2>
+                <!-- <button type="button">Copy to Clipboard</button> -->
             </div>
-            <h2 id="editor-title">Output</h2>
-            <div id="editor"></div>
-            <h2 id="viewer-title">HTML</h2>
-            <textarea id="viewer"></textarea>
+            <textarea id="viewer" class="content sidebar"></textarea>
         </div>
     </body>
 </html>

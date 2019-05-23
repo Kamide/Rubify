@@ -1,0 +1,74 @@
+:root {
+    --btn-color: hsl(50, 100%, 75%);
+    --btn-shadow: hsl(40, 95%, 65%);
+    --btn-hover-color: hsl(55, 100%, 80%);
+    --btn-hover-shadow: hsl(45, 95%, 70%);
+    --btn-focus-color: hsl(60, 100%, 95%);
+    --btn-focus-shadow: hsl(0, 95%, 45%);
+}
+
+fieldset, legend, textarea, input, label, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+textarea {
+    padding: 0.25em;
+    border: none;
+    outline: thin solid silver;
+}
+
+textarea:hover {
+    outline: thin solid gray;
+}
+
+textarea:focus {
+    outline: medium solid skyblue;
+    z-index: 1;
+}
+
+input, label, button {
+    font: inherit;
+    font-size: 0.75em;
+    vertical-align: middle;
+}
+
+button {
+    padding: 0.25em 1em;
+    border-left: none;
+    border-right: none;
+    border-top: medium solid var(--btn-color);
+    border-bottom: medium solid var(--btn-shadow);
+    border-radius: 0.25em;
+    background-color: var(--btn-color);
+    vertical-align: bottom;
+    transition-property: border, background-color;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-out;
+}
+
+button:hover {
+    border-top-color: var(--btn-hover-color);
+    border-bottom-color: var(--btn-hover-shadow);
+    background-color: var(--btn-hover-color);
+    transition: none;
+}
+
+button:active {
+    border-top: none;
+    border-bottom: none;
+}
+
+button:disabled {
+    border-top-color: var(--btn-shadow);
+    border-bottom-color: var(--btn-color);
+    background-color: var(--btn-color);
+}
+
+button:focus {
+    outline: none;
+    border-top-color: var(--btn-focus-color);
+    box-shadow: 0 0 0.25em var(--btn-focus-shadow);
+    transition: none;
+}
