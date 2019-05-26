@@ -5,8 +5,18 @@
         <title>Rubify</title>
         <link rel="stylesheet" href="css/layout.css">
         <link rel="stylesheet" href="css/input.css">
+        <link rel="stylesheet" href="css/ruby.css">
         <script type="text/javascript" src="js/annotation.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript">
+            function initialize() {
+                ae = new AnnotationEditor('baseText', 'annotation',
+                    'baseTextDelimiter', 'annotationDelimiter',
+                    'segmented', 'spaced', 'superscripted', 'colored',
+                    'editor', 'viewer',
+                    'cancelBtn', 'applyBtn', 'deleteBtn');
+            }
+        </script>
     </head>
     <body onload="initialize();">
         <div id="page">
@@ -21,7 +31,7 @@
                         <option value=null>Process Everything In One Go</option>
                         <option value="" selected>Process Characters Individually</option>
                         <option value=" ">Process Words Separately (Split by Space)</option>
-                        <option value="pinyin" disabled>Process Compound Hanzi (e.g. maps 快樂 with kuàilè)</option>
+                        <!-- <option value="pinyin">Process Compound Hanzi (e.g. maps 快樂 with kuàilè)</option> -->
                     </select>
                 </fieldset>
                 <fieldset>
@@ -59,8 +69,13 @@
             <div class="toolbar mainbar float-right">
                 <h2>Output</h2>
                 <div class="float-right">
-                    <button type="button" onclick="addRubyToEditor();">Add New Ruby</button>
-                    <button type="button" onclick="clearEditor();">Clear All Rubies</button>
+                    <button id="cancelBtn" type="button" onclick="ae.resetCursor();">Cancel</button>
+                    <button id="applyBtn" type="button" onclick="ae.editRuby();">Edit</button>
+                    <button id="deleteBtn" type="button" onclick="ae.deleteRuby();">Delete</button>
+                    <button type="button" onclick="ae.addRuby();">Add</button>
+                    <button type="button" onclick="ae.clearOutput();">Clear Output</button>
+                    <button type="button" onclick="ae.clearInputs();">Clear Inputs</button>
+                    <button type="button" onclick="ae.resetForm();">Reset Form</button>
                 </div>
             </div>
             <div id="editor" class="content grid-col-main"></div>

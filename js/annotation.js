@@ -18,20 +18,29 @@ class Annotation {
         this.colored = colored;
     }
 
-    get texts() { return this.text.split(this.delimiters['text']); }
-    get notes() { return this.note.split(this.delimiters['note']); }
+    get textDelimiter() { return this.delimiters['text']; }
+    get noteDelimiter() { return this.delimiters['note']; }
+
+    get texts() { return this.text.split(this.textDelimiter); }
+    get notes() { return this.note.split(this.noteDelimiter); }
+
+    set textDelimiter(td) { this.delimiters['text'] = td; }
+    set noteDelimiter(nd) { this.delimiters['note'] = nd; }
 
     rubify(text, note) {
-        if (this.superscripted || this.colored)
+        if (this.superscripted || this.colored) {
             var phonemesTonemes = note.split(/(\d)/);
+        }
 
         if (this.superscripted) {
             var newNote = '';
             for (var i = 0; i < phonemesTonemes.length; ++i) {
-                if (Annotation.isToneNumber(phonemesTonemes[i]))
+                if (Annotation.isToneNumber(phonemesTonemes[i])) {
                     newNote += SUP_L + phonemesTonemes[i] + SUP_R;
-                else
+                }
+                else {
                     newNote += phonemesTonemes[i];
+                }
             }
         }
         else {
@@ -44,8 +53,9 @@ class Annotation {
         if (this.colored) {
             tonemes = phonemesTonemes.filter(Number);
             lastTone = tonemes[tonemes.length - 1];
-            if (Annotation.isToneNumber(lastTone))
+            if (Annotation.isToneNumber(lastTone)) {
                 tonal = true;
+            }
         }
 
         if (tonal) {
@@ -62,10 +72,12 @@ class Annotation {
 
     toString() {
         if (this.note === '') {
-            if (this.spaced)
+            if (this.spaced) {
                 return this.text + SPACE;
-            else
+            }
+            else {
                 return this.text;
+            }
         }
 
         var rubies = '';
@@ -76,19 +88,22 @@ class Annotation {
         if (this.segmented) {
             for (var i = 0; i < count; ++i) {
                 rubies += RUBY_L + this.rubify(texts[i], notes[i]) + RUBY_R;
-                if (this.spaced)
+                if (this.spaced) {
                     rubies += SPACE;
+                }
             }
         }
         else {
             for (var i = 0; i < count; ++i) {
                 rubies += this.rubify(texts[i], notes[i])
-                if (this.spaced && i < count - 1)
+                if (this.spaced && i < count - 1) {
                     rubies += SPACE;
+                }
             }
             rubies = RUBY_L + rubies + RUBY_R;
-            if (this.spaced)
+            if (this.spaced) {
                 rubies += SPACE;
+            }
         }
 
         return rubies;

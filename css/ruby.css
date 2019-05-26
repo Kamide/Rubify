@@ -1,0 +1,23 @@
+ruby:hover {
+    outline: thin solid rgba(255, 0, 0, 0.5);
+}
+
+rt {
+    padding-top: 0.25em;
+    font-size: 0.75em;
+}
+
+.ruby-block {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    white-space: pre-wrap;
+}
+
+.ruby-block:hover {
+    outline: thin solid gray;
+}
+
+.ruby-block:active, .ruby-block.active {
+    outline: thick solid rgba(135, 206, 235, 0.5);
+}

@@ -64,7 +64,7 @@ h2 {
 }
 
 #editor {
-    border: thin solid silver;
+    outline: thin solid silver;
     overflow: scroll;
 }
 
@@ -73,13 +73,8 @@ h2 {
     resize: none;
 }
 
-ruby:hover {
-    outline: thick solid rgba(250, 30, 20, 0.5);
-    outline-offset: 4px;
-}
-
-rt {
-    font-size: 0.75em;
+#cancelBtn, #applyBtn, #deleteBtn {
+    display: none;
 }
 
 @media only screen and (min-width: 800px) and (min-height: 600px) {
@@ -123,6 +118,7 @@ rt {
 
     .toolbar h2:not(:last-child) {
         margin-bottom: 0;
+        margin-right: 0.5em;
     }
 
     .content {
@@ -145,6 +141,10 @@ rt {
     }
 
     #inputbar fieldset:not(:last-child) {
+        margin-right: 1em;
+    }
+
+    .toolbar h2:not(:last-child) {
         margin-right: 1em;
     }
 }
