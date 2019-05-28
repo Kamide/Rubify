@@ -36,13 +36,17 @@ class Annotation {
                     wordCount.push(0);
                     ++j;
                 }
-                if (INITIALS.indexOf(note[i]) > -1 &&
-                    VOWELS.indexOf(note[i + 1]) > -1) {
-                    wordCount[j] += 1;
-                    ++i;  // Skip the vowel
+                else if (INITIALS.indexOf(note[i]) > -1 &&
+                         VOWELS.indexOf(note[i + 1]) > -1) {
+                    wordCount[j] += 1;  // Initial + Vowel + ...
+                    ++i;  // Do not process the vowel
                 }
-                if (note[i].toLowerCase() === 'r' &&
-                    (note[i + 1] === SPACE || i === note.length - 1)) {
+                else if (VOWELS.indexOf(note[i] > -1) &&
+                         (i === 0 || note[i - 1] === SPACE)) {
+                    wordCount[j] += 1;  // Vowel + ...
+                }
+                else if (note[i].toLowerCase() === 'r' &&
+                         (note[i + 1] === SPACE || i === note.length - 1)) {
                     wordCount[j] += 1;  // erhua
                 }
             }
