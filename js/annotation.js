@@ -4,6 +4,9 @@ const RUBY_L = '<ruby>', RUBY_R = '</ruby>',
       SUP_L = '<sup>', SUP_R = '</sup>',
       SPACE = ' ';
 
+const INITIALS = "bpmfdtnlgkhjqxrzcswy'BPMFDTNLGKHJQXRZCSWY",
+      VOWELS = 'āēīōūǖĀĒĪŌŪǕáéíóúǘÁÉÍÓÚǗǎěǐǒǔǚǍĚǏǑǓǙàèìòùǜÀÈÌÒÙǛaeiouüAEIOUÜ';
+
 const COLORS = ['black', 'lightskyblue', 'orange', 'royalblue', 'darkseagreen', 'crimson', 'midnightblue',
                 'lightskyblue', 'royalblue', 'midnightblue'];
 
@@ -21,7 +24,44 @@ class Annotation {
     get textDelimiter() { return this.delimiters['text']; }
     get noteDelimiter() { return this.delimiters['note']; }
 
-    get texts() { return this.text.split(this.textDelimiter); }
+    get texts() {
+        if (this.textDelimiter === 'pinyin') {
+            var note = this.note;
+            var wordCount = [];
+            var j = 0;  // wordCount index
+
+            wordCount.push(0);
+            for (var i = 0; i < note.length; ++i) {
+                if (note[i] === SPACE) {
+                    wordCount.push(0);
+                    ++j;
+                }
+                if (INITIALS.indexOf(note[i]) > -1 &&
+                    VOWELS.indexOf(note[i + 1]) > -1) {
+                    wordCount[j] += 1;
+                    ++i;  // Skip the vowel
+                }
+                if (note[i].toLowerCase() === 'r' &&
+                    (note[i + 1] === SPACE || i === note.length - 1)) {
+                    wordCount[j] += 1;  // erhua
+                }
+            }
+
+            var hanzi = [];
+            var hanziAdded = 0;
+            for (var i = 0; i <= j; ++i) {
+                if (wordCount[i] > 0) {
+                    hanzi.push(this.text.slice(hanziAdded, hanziAdded + wordCount[i]))
+                    hanziAdded += wordCount[i];
+                }
+            }
+            return hanzi;
+        }
+        else {
+            return this.text.split(this.textDelimiter);
+        }
+    }
+
     get notes() { return this.note.split(this.noteDelimiter); }
 
     set textDelimiter(td) { this.delimiters['text'] = td; }

@@ -25,7 +25,7 @@ class AnnotationEditor {
     }
 
     addRuby() {
-        if (this.baseText === '') {
+        if (this.baseText.value === '') {
             return;
         }
 
