@@ -41,7 +41,7 @@ class Annotation {
                     wordCount[j] += 1;  // Initial + Vowel + ...
                     ++i;  // Do not process the vowel
                 }
-                else if (VOWELS.indexOf(note[i] > -1) &&
+                else if (VOWELS.indexOf(note[i]) > -1 &&
                          (i === 0 || note[i - 1] === SPACE)) {
                     wordCount[j] += 1;  // Vowel + ...
                 }
